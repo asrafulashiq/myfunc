@@ -1,31 +1,26 @@
-"""PyAudio Example: Play a WAVE file."""
-
 import pyaudio
 import wave
 import sys
 
-CHUNK = 1024
 
-if len(sys.argv) < 2:
-    print("Plays a wave file.\n\nUsage: %s filename.wav" % sys.argv[0])
-    sys.exit(-1)
+def play(file,chunk=1024):
+	"""	
+		play an audio file from a file
+		input argumets:
+			chunk : default 1024
+			file : audio file name to be played, like .wav
+	"""
 
-wf = wave.open(sys.argv[1], 'rb')
-
-p = pyaudio.PyAudio()
-
-stream = p.open(format=p.get_format_from_width(wf.getsampwidth()),
+	wf = wave.open(file, 'rb')
+	p = pyaudio.PyAudio()
+	stream = p.open(format=p.get_format_from_width(wf.getsampwidth()),
                 channels=wf.getnchannels(),
                 rate=wf.getframerate(),
                 output=True)
-
-data = wf.readframes(CHUNK)
-
-while data != '':
-    stream.write(data)
-    data = wf.readframes(CHUNK)
-
-stream.stop_stream()
-stream.close()
-
-p.terminate()
+	data = wf.readframes(chunk)
+	while data != '':
+		stream.write(data)
+		data = wf.readframes(chunk)
+	stream.stop_stream()
+	stream.close()
+	p.terminate()

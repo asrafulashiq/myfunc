@@ -1,3 +1,8 @@
+
+import pyaudio
+import wave
+import sys
+
 def play(file,chunk=1024):
 	"""	
 		play an audio file from a file

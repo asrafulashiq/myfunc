@@ -10,27 +10,22 @@ import pyaudio
 import wave
 import sys
 import recordaudio
-import play
+import playaudio
 
 def record(*args,**kwargs):
 	return recordaudio.record(*args,**kwargs)
 
 
 def play(file,chunk=1024):
-	"""	
-		play an audio file from a file
-		input argumets:
-			chunk : default 1024
-			file : audio file name to be played, like .wav
-	"""
-	play.play(file,chunk)
+	
+	playaudio.play(file,chunk)
 
 
 
 def main():
-		record(file="my.wav")
+		#record(file="my.wav")
 		play("my.wav")
-		pass
+		
 if __name__ == '__main__':
 	main()
 	
