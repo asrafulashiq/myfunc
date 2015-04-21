@@ -11,6 +11,9 @@ import wave
 import sys
 import recordaudio
 
+def record(*args,**kwargs):
+	return recordaudio.record(*args,**kwargs)
+
 
 def play(file,chunk=1024):
 	"""	
@@ -35,9 +38,9 @@ def play(file,chunk=1024):
 	p.terminate()
 
 def main():
-	recordaudio.record(file="my.wav")
-	play("my.wav")
+		#record(file="my.wav")
+		#play("my.wav")
+		pass
 if __name__ == '__main__':
 	main()
- 
 	

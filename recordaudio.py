@@ -3,6 +3,7 @@
 import pyaudio
 import wave
 import sys
+from scipy.io.wavfile import read
 
 def record(
 	file="my.wav",
@@ -34,15 +35,16 @@ def record(
 	stream.close()
 	p.terminate()
 
-	print len(frames)
 
-	print frames
+	if len(file)<=1:
+		file="tmp.wav"
+	WAVE_OUTPUT_FILENAME = file
+	wf = wave.open(WAVE_OUTPUT_FILENAME, 'w')
+	wf.setnchannels(CHANNELS)
+	wf.setsampwidth(p.get_sample_size(FORMAT))
+	wf.setframerate(RATE)
+	wf.writeframes(b''.join(frames))
+	wf.close()
 
-	if len(file)>0:
-		WAVE_OUTPUT_FILENAME = file
-		wf = wave.open(WAVE_OUTPUT_FILENAME, 'wb')
-		wf.setnchannels(CHANNELS)
-		wf.setsampwidth(p.get_sample_size(FORMAT))
-		wf.setframerate(RATE)
-		wf.writeframes(b''.join(frames))
-		wf.close()	
+	adata = read(file)
+	return adata[1]
