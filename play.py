@@ -1,20 +1,3 @@
-"""
-	This package has some functions to record or play 
-	audio file..
-	For recording call record().
-	For playing call play().
-
-"""
-
-import pyaudio
-import wave
-import sys
-import recordaudio
-
-def record(*args,**kwargs):
-	return recordaudio.record(*args,**kwargs)
-
-
 def play(file,chunk=1024):
 	"""	
 		play an audio file from a file
@@ -36,13 +19,3 @@ def play(file,chunk=1024):
 	stream.stop_stream()
 	stream.close()
 	p.terminate()
-
-
-
-def main():
-		record(file="my.wav")
-		play("my.wav")
-		pass
-if __name__ == '__main__':
-	main()
-	
